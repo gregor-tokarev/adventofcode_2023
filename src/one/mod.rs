@@ -1,7 +1,6 @@
 use std::collections::HashMap;
 
 fn get_number(line: &str) -> usize {
-
     let mut sums_holder = vec![];
 
     let numeric_map = HashMap::from([
@@ -13,7 +12,7 @@ fn get_number(line: &str) -> usize {
         ("six", '6'),
         ("seven", '7'),
         ("eight", '8'),
-        ("nine", '9')
+        ("nine", '9'),
     ]);
 
     for (idx, ci) in line.chars().enumerate() {
@@ -31,22 +30,28 @@ fn get_number(line: &str) -> usize {
                 }
             }
         }
-    };
+    }
 
-
-    let result_str = format!("{}{}", sums_holder.first().expect("no first"), sums_holder.last().expect("no last"));
+    let result_str = format!(
+        "{}{}",
+        sums_holder.first().expect("no first"),
+        sums_holder.last().expect("no last")
+    );
 
     result_str.parse::<usize>().expect("parsing err")
 }
 
 fn sum_lines(lines: &str) -> Option<usize> {
-    lines.lines().map(|line| get_number(line)).reduce(|a, b| a + b)
+    lines
+        .lines()
+        .map(|line| get_number(line))
+        .reduce(|a, b| a + b)
 }
 
 #[cfg(test)]
 mod tests {
-    use std::fs;
     use super::*;
+    use std::fs;
 
     #[test]
     fn test_example_a() {
@@ -78,7 +83,6 @@ xtwone3four
 4nineeightseven2
 zoneight234
 7pqrstsixteen"#;
-
 
         if let Some(res) = sum_lines(input) {
             println!("{res}");
