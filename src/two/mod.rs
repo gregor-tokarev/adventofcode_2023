@@ -125,7 +125,6 @@ fn sum_maxes(lines: &str) -> usize {
     let mut res = 0;
     for game in games {
         let max_summs = max_value_in_game(&game);
-        println!("{max_summs:?}");
 
         let mut partial_sum = 1;
         for num in max_summs {
